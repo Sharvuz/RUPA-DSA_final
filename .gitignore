@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.idea/
+.vscode/
+.venv/
+venv/
+
+# Training data and model artifacts must stay outside Git.
+dataset_model/
+data/
+datasets/
+features/
+outputs/
+results/
+model/
+dtset/
+rupa_artifacts/
+*.pth
+*.pt
+*.ckpt
+*.zip
+
+# Local logs and generated experiment files.
+*.log
+runtime_hours.txt
+run_config.json
