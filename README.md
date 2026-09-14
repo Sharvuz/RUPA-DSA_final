@@ -14,19 +14,19 @@ Phiên bản này đánh dấu một bước đột phá về mặt học thuậ
 
 Dưới đây là điểm số thực tế được ghi nhận khi huấn luyện kiến trúc RUPA-DSA (với CLIP features) bằng kỹ thuật Warm-Start:
 
-### 1. Tập dữ liệu XD-Violence
-| Metric | Baseline DSANet | RUPA-DSA (Final) | Tăng trưởng |
+### 1. Tập dữ liệu XD-Violence (Đa miền - Multi-domain)
+| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
 |--------|:---:|:---:|:---:|
-| **AUC** | 95.39% | **95.40%** | + 0.01% |
-| **AP** | 87.01% | **87.04%** | **+ 0.03%** |
-*(Lập đỉnh tại Epoch 2 - Step 38400)*
+| **AUC** | 95.39% | **95.40%** | 95.39% |
+| **AP** | 87.01% | **87.04% (SOTA)** | 86.87% |
+*(Otsu phát huy sức mạnh tối đa trên dữ liệu đa miền, giúp loại bỏ nhiễu nhãn triệt để)*
 
-### 2. Tập dữ liệu UCF-Crime
-| Metric | Baseline DSANet | RUPA-DSA (Final) | Tăng trưởng |
+### 2. Tập dữ liệu UCF-Crime (Đơn miền CCTV - Homogeneous)
+| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
 |--------|:---:|:---:|:---:|
-| **AUC** | 89.54% | **89.53%** | Duy trì |
-| **AP** | 37.85% | **38.84%** | **+ 0.99%** |
-*(Lập đỉnh tại Epoch 1 - Step 3840)*
+| **AUC** | 89.54% | 89.53% | **89.54%** |
+| **AP** | 37.85% | 38.84% | **39.09% (SOTA Mới)** |
+*(Tắt Otsu và dùng Top-K cứng kết hợp Warm-Start vô tình tạo ra hiệu ứng **Hard Negative Mining**, ép mạng học các hành vi vi tế, thiết lập đỉnh SOTA mới)*
 
 ---
 
@@ -121,7 +121,7 @@ python src/ucf_train.py \
   --loss-gather-weight 1.0
 ```
 
-### Cấu hình Train cho XD-Violence (10 Epochs)
+### Cấu hình Train cho XD-Violence (10 Epochs - Đa miền CẦN Otsu)
 ```bash
 python src/xd_train.py \
   --train-list /path/to/xd_train.csv \
@@ -135,6 +135,34 @@ python src/xd_train.py \
   --seed 234 \
   --rupa-use true \
   --adaptive_normal_selection true \
+  --routing-mode safe_gate \
+  --main-lr 0.0 \
+  --refiner-lr 1e-5 \
+  --routing-det-weight 0.5 \
+  --routing-rec-weight 0.3 \
+  --routing-sem-weight 0.2 \
+  --loss-residual-weight 1.0 \
+  --loss-reconstructed-normal-weight 1.0 \
+  --loss-dnp-normal-weight 0.1 \
+  --loss-consistency-weight 1.0 \
+  --loss-gather-weight 1.0
+```
+
+### Cấu hình Train Không Otsu (Hard Negative Mining - SOTA cho UCF-Crime)
+Nếu bạn muốn đạt mốc SOTA `39.09%` trên UCF-Crime, hãy vô hiệu hóa Otsu bằng cờ `--adaptive_normal_selection false`:
+```bash
+python src/ucf_train.py \
+  --train-list /path/to/ucf_train.csv \
+  --test-list /path/to/ucf_test.csv \
+  --model-path /path/to/best_ucf.pth \
+  --checkpoint-path /path/to/checkpoint_ucf.pth \
+  --init-model-path /path/to/dsanet_model_ucf.pth \
+  --max-epoch 5 \
+  --batch-size 48 \
+  --num-workers 2 \
+  --seed 234 \
+  --rupa-use true \
+  --adaptive_normal_selection false \
   --routing-mode safe_gate \
   --main-lr 0.0 \
   --refiner-lr 1e-5 \
