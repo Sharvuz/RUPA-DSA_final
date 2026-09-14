@@ -25,7 +25,7 @@ Dưới đây là điểm số thực tế được ghi nhận khi huấn luyệ
 | Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
 |--------|:---:|:---:|:---:|
 | **AUC** | 89.54% | 89.53% | **89.54%** |
-| **AP** | 37.85% | 38.84% | **39.09% (SOTA Mới)** |
+| **AP** | 37.85% | 38.84% | **39.1% (SOTA Mới)** |
 *(Tắt Otsu và dùng Top-K cứng kết hợp Warm-Start vô tình tạo ra hiệu ứng **Hard Negative Mining**, ép mạng học các hành vi vi tế, thiết lập đỉnh SOTA mới)*
 
 ---
