@@ -15,14 +15,14 @@ Phiên bản này đánh dấu một bước đột phá về mặt học thuậ
 Dưới đây là điểm số thực tế được ghi nhận khi huấn luyện kiến trúc RUPA-DSA (với CLIP features) bằng kỹ thuật Warm-Start:
 
 ### 1. Tập dữ liệu XD-Violence (Đa miền - Multi-domain)
-| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
+| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) |
 |--------|:---:|:---:|:---:|
 | **AUC** | 95.39% | **95.40%** | 95.39% |
 | **AP** | 86,99% | **87.04% (SOTA)** | 86.87% |
 *(Otsu phát huy sức mạnh tối đa trên dữ liệu đa miền, giúp loại bỏ nhiễu nhãn triệt để)*
 
 ### 2. Tập dữ liệu UCF-Crime (Đơn miền CCTV - Homogeneous)
-| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
+| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) |
 |--------|:---:|:---:|:---:|
 | **AUC** | 89.44% | 89.53% | **89.54%** |
 | **AP** | 37.85% | 38.84% | **39.1% (SOTA Mới)** |
