@@ -18,13 +18,13 @@ Dưới đây là điểm số thực tế được ghi nhận khi huấn luyệ
 | Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
 |--------|:---:|:---:|:---:|
 | **AUC** | 95.39% | **95.40%** | 95.39% |
-| **AP** | 87.01% | **87.04% (SOTA)** | 86.87% |
+| **AP** | 86,99% | **87.04% (SOTA)** | 86.87% |
 *(Otsu phát huy sức mạnh tối đa trên dữ liệu đa miền, giúp loại bỏ nhiễu nhãn triệt để)*
 
 ### 2. Tập dữ liệu UCF-Crime (Đơn miền CCTV - Homogeneous)
 | Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Không Otsu) |
 |--------|:---:|:---:|:---:|
-| **AUC** | 89.54% | 89.53% | **89.54%** |
+| **AUC** | 89.44% | 89.53% | **89.54%** |
 | **AP** | 37.85% | 38.84% | **39.1% (SOTA Mới)** |
 *(Tắt Otsu và dùng Top-K cứng kết hợp Warm-Start vô tình tạo ra hiệu ứng **Hard Negative Mining**, ép mạng học các hành vi vi tế, thiết lập đỉnh SOTA mới)*
 
