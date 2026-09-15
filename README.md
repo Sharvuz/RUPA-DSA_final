@@ -94,7 +94,7 @@ flowchart TD
 
 **Link tải Best Checkpoint gốc của tác giả DSANet:** [Google Drive](https://drive.google.com/drive/folders/1PqvaNm_s-fOOrnJRqrG50zV2R2UqRwHK)
 
-### Cấu hình Train cho UCF-Crime (5 Epochs)
+### Cấu hình Train cho UCF-Crime (10 Epochs)
 ```bash
 python src/ucf_train.py \
   --train-list /path/to/ucf_train.csv \
@@ -102,8 +102,8 @@ python src/ucf_train.py \
   --model-path /path/to/best_ucf.pth \
   --checkpoint-path /path/to/checkpoint_ucf.pth \
   --init-model-path /path/to/dsanet_model_ucf.pth \
-  --max-epoch 5 \
-  --batch-size 48 \
+  --max-epoch 10 \
+  --batch-size 64 \
   --num-workers 2 \
   --seed 234 \
   --rupa-use true \
@@ -130,7 +130,7 @@ python src/xd_train.py \
   --checkpoint-path /path/to/checkpoint_xd.pth \
   --init-model-path /path/to/dsanet_model_xd.pth \
   --max-epoch 10 \
-  --batch-size 64 \
+  --batch-size 96 \
   --num-workers 2 \
   --seed 234 \
   --rupa-use true \
