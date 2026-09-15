@@ -15,7 +15,8 @@ import math
 RUPA_PARAMETER_PREFIXES = ('rupa_gate.',)
 
 def load_compatible_model_state(model, state_dict, allow_legacy_dsanet=False):
-    incompatible = model.load_state_dict(state_dict, strict=False)
+    target_model = model.module if hasattr(model, 'module') else model
+    incompatible = target_model.load_state_dict(state_dict, strict=False)
     missing = list(incompatible.missing_keys)
     unexpected = list(incompatible.unexpected_keys)
     allowed_missing = (
