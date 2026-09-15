@@ -46,45 +46,9 @@ Thay vì chọn một tỷ lệ phần trăm khung hình bình thường cố đ
 
 ## 📐 Sơ đồ Kiến trúc (Architecture Diagram)
 
-```mermaid
-flowchart TD
-    %% Inputs
-    V[Video] --> F[CLIP Vision Encoder]
-    F --> X[Video Features X]
-    
-    T["Text Prompts\n'Normal' / 'Abnormal'"] --> CLIP_T[CLIP Text Encoder]
-    CLIP_T --> T_Feat[Text Features]
+![Sơ đồ Kiến trúc RUPA-DSA](rupa_architecture.png)
 
-    %% Branch 1: Base Detector
-    X --> BaseDet[Base Anomaly Detector]
-    BaseDet --> S_det[Anomaly Scores S_det]
-    S_det --> L_MIL[Loss 1: MIL Classification]
-
-    %% Branch 2: Adaptive Selection & Reconstruction
-    S_det --> Otsu{"Adaptive Normal Selection\n(Otsu Thresholding)"}
-    X --> Otsu
-    Otsu -->|Selects| X_norm[Normal Frames X_norm]
-    
-    X_norm --> DNP[DNP Extractor]
-    DNP --> F_rec[Reconstructed Features F_rec]
-    F_rec --> L_Rec[Loss 5: Normal Reconstruction]
-    
-    %% Branch 3: Residual Semantics
-    X --> Sub(( - ))
-    F_rec --> Sub
-    Sub --> R[Residual Features R]
-    
-    R --> Align[Semantic Alignment with Text]
-    T_Feat --> Align
-    Align --> S_sem[Semantic Anomaly Scores S_sem]
-    S_sem --> L_Res[Loss 4: Residual Event]
-
-    %% Final Routing
-    S_det --> Router(("Closed-Loop\nRouting\n(Safe Gate)"))
-    F_rec --> Router
-    S_sem --> Router
-    Router --> S_final[Final Anomaly Scores]
-```
+> **Lưu ý:** Dự án này là một bản nâng cấp và cải tiến mở rộng dựa trên kiến trúc gốc của [DSANet](https://github.com/hcmut-ubmlab/DSANet). RUPA-DSA kế thừa sức mạnh trích xuất đặc trưng của DSANet, đồng thời bổ sung thêm các module nắn chỉnh dị thường (Reconstruction & Semantic Routing) để giải quyết triệt để bài toán Nhiễu nhãn (Label Noise) trong Học đa trường hợp (MIL).
 
 ---
 
