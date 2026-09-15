@@ -138,6 +138,9 @@ class ConsistencyLoss(nn.Module):
 consistency_loss_fn = ConsistencyLoss()
 
 def train(model, train_loader, test_loader, args, label_map: dict, device):
+    if torch.cuda.device_count() > 1:
+        print(f"🔥 KÍCH HOẠT CHẾ ĐỘ CHẠY KÉP TRÊN {torch.cuda.device_count()} GPUs!", flush=True)
+        model = torch.nn.DataParallel(model)
     model.to(device)
     import os
     os.makedirs(os.path.dirname(args.checkpoint_path) or '.', exist_ok=True)
@@ -307,7 +310,7 @@ def train(model, train_loader, test_loader, args, label_map: dict, device):
             ap_best = AP
             checkpoint = {
                 'epoch': e,
-                'model_state_dict': model.state_dict(),
+                'model_state_dict': model.module.state_dict() if hasattr(model, 'module') else model.state_dict(),
                 'optimizer_state_dict': optimizer_main.state_dict(),
                 'optimizer_refiner_state_dict': optimizer_refiner.state_dict(),
                 'scheduler_main_state_dict': scheduler_main.state_dict(),
