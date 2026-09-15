@@ -11,7 +11,7 @@ Phiên bản này đánh dấu một bước đột phá về mặt học thuậ
 ---
 
 ## 🚀 Cột mốc Benchmark Kỷ Lục
-
+Train bằng GPU T4x2 kaggle
 Dưới đây là điểm số thực tế được ghi nhận khi huấn luyện kiến trúc RUPA-DSA (với CLIP features) bằng kỹ thuật Warm-Start:
 
 ### 1. Tập dữ liệu XD-Violence (Đa miền - Multi-domain)
@@ -22,10 +22,10 @@ Dưới đây là điểm số thực tế được ghi nhận khi huấn luyệ
 *(Otsu phát huy sức mạnh tối đa trên dữ liệu đa miền, giúp loại bỏ nhiễu nhãn triệt để)*
 
 ### 2. Tập dữ liệu UCF-Crime (Đơn miền CCTV - Homogeneous)
-| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) | RUPA-DSA (Không Otsu + Bỏ Semantics) |
+| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) | RUPA-DSA (Top-K + Bỏ Semantics) |
 |--------|:---:|:---:|:---:|:---:|
 | **AUC** | 89.44% | 89.53% | 89.54% | **89.55%** |
-| **AP** | 37.85% | 38.84% | 39.09% | **40.21% (SOTA Mới)** |
+| **AP** | 37.85% | 38.84% | 39.09% | **40.21% (SOTA)** |
 *(Tắt Otsu kết hợp triệt tiêu hoàn toàn nhánh Ngôn ngữ (S_sem = 0) và cân bằng tỷ lệ 50/50 cho Thị giác thuần túy giúp loại bỏ nhiễu ngôn ngữ trên dữ liệu CCTV, thiết lập đỉnh SOTA lịch sử 40.21%)*
 
 ---
