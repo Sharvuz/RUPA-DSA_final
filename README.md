@@ -4,7 +4,7 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-1.10%2B-ee4c2c.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-**RUPA-DSA Final Version** là phiên bản hoàn thiện và tối ưu nhất cho bài toán Phát hiện Dị thường Video (Weakly Supervised Video Anomaly Detection). 
+**RUPA-DSA Final Version** là phiên bản hoàn thiện cho bài toán Phát hiện Dị thường Video (Weakly Supervised Video Anomaly Detection). 
 
 Phiên bản này đánh dấu một bước đột phá về mặt học thuật khi áp dụng chiến lược **Huấn luyện tịnh tiến 2 giai đoạn (Two-stage Progressive Training / Warm-Start)** kết hợp với cơ chế **Adaptive Normal Selection (Otsu's Thresholding)**, giúp mô hình vượt qua giới hạn của hiện tượng Nhiễu nhãn (Label Noise) và đạt được những mốc điểm số State-of-the-Art (SOTA) chưa từng có trên cả 2 bộ dữ liệu khó nhất hiện nay.
 
