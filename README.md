@@ -22,7 +22,7 @@ Dưới đây là điểm số thực tế được ghi nhận khi huấn luyệ
 *(Otsu phát huy sức mạnh tối đa trên dữ liệu đa miền, giúp loại bỏ nhiễu nhãn triệt để)*
 
 ### 2. Tập dữ liệu UCF-Crime (Đơn miền CCTV - Homogeneous)
-| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) | RUPA-DSA (Top-K + Bỏ Semantics) |
+| Metric | Baseline DSANet | RUPA-DSA (Otsu) | RUPA-DSA (Top-K + Warm-Start) | RUPA-DSA (Top-K + Warm-Start Bỏ Semantics) |
 |--------|:---:|:---:|:---:|:---:|
 | **AUC** | 89.44% | 89.53% | 89.54% | **89.55%** |
 | **AP** | 37.85% | 38.84% | 39.09% | **40.21% (SOTA)** |
