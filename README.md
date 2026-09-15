@@ -112,7 +112,7 @@ python src/xd_train.py \
   --loss-gather-weight 1.0
 ```
 
-### Cấu hình Train Không Otsu (Triệt tiêu Ngôn ngữ - SOTA Tuyệt đối 40.21% cho UCF-Crime)
+### Cấu hình Train (Triệt tiêu Ngôn ngữ - SOTA Tuyệt đối 40.21% cho UCF-Crime)
 Nếu bạn muốn đạt mốc đỉnh cao SOTA `40.21%` trên UCF-Crime, hãy vô hiệu hóa Otsu, ép trọng số `routing-sem-weight` về 0, và cân bằng tỷ lệ `0.5 - 0.5` cho thị giác:
 ```bash
 python src/ucf_train.py \
