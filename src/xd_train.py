@@ -246,8 +246,8 @@ def train(model, train_loader, test_loader, args, label_map: dict, device):
                     reconstructed_features=DNP['reconstructed_features'],
                     lengths=feat_lengths
                 )
-                g_loss = DNP['g_loss']
-                dnp_normal_loss = DNP.get('dnp_normal_loss', logits1.sum() * 0.0)
+                g_loss = DNP['g_loss'].mean()
+                dnp_normal_loss = DNP.get('dnp_normal_loss', logits1.sum() * 0.0).mean()
 
             # loss4
             if DNP_use and args.rupa_use:
