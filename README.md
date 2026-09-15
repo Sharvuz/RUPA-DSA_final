@@ -15,7 +15,7 @@ Train bằng GPU T4x2 kaggle
 Dưới đây là điểm số thực tế được ghi nhận khi huấn luyện kiến trúc RUPA-DSA (với CLIP features) bằng kỹ thuật Warm-Start:
 
 ### 1. Tập dữ liệu XD-Violence (Đa miền - Multi-domain)
-| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) |
+| Metric | Baseline DSANet | RUPA-DSA (Otsu) | RUPA-DSA (Top-K + Warm-Start) |
 |--------|:---:|:---:|:---:|
 | **AUC** | 95.39% | **95.40%** | 95.39% |
 | **AP** | 86,99% | **87.04% (SOTA)** | 87.02% |
