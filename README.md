@@ -22,11 +22,11 @@ Dưới đây là điểm số thực tế được ghi nhận khi huấn luyệ
 *(Otsu phát huy sức mạnh tối đa trên dữ liệu đa miền, giúp loại bỏ nhiễu nhãn triệt để)*
 
 ### 2. Tập dữ liệu UCF-Crime (Đơn miền CCTV - Homogeneous)
-| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) |
-|--------|:---:|:---:|:---:|
-| **AUC** | 89.44% | 89.53% | **89.54%** |
-| **AP** | 37.85% | 38.84% | **39.1% (SOTA Mới)** |
-*(Tắt Otsu và dùng Top-K cứng kết hợp Warm-Start vô tình tạo ra hiệu ứng **Hard Negative Mining**, ép mạng học các hành vi vi tế, thiết lập đỉnh SOTA mới)*
+| Metric | Baseline DSANet | RUPA-DSA (Có Otsu) | RUPA-DSA (Top-K) | RUPA-DSA (Không Otsu + Bỏ Semantics) |
+|--------|:---:|:---:|:---:|:---:|
+| **AUC** | 89.44% | 89.53% | 89.54% | **89.55%** |
+| **AP** | 37.85% | 38.84% | 39.09% | **40.21% (SOTA Mới)** |
+*(Tắt Otsu kết hợp triệt tiêu hoàn toàn nhánh Ngôn ngữ (S_sem = 0) và cân bằng tỷ lệ 50/50 cho Thị giác thuần túy giúp loại bỏ nhiễu ngôn ngữ trên dữ liệu CCTV, thiết lập đỉnh SOTA lịch sử 40.21%)*
 
 ---
 
@@ -148,8 +148,8 @@ python src/xd_train.py \
   --loss-gather-weight 1.0
 ```
 
-### Cấu hình Train Không Otsu (Hard Negative Mining - SOTA cho UCF-Crime)
-Nếu bạn muốn đạt mốc SOTA `39.09%` trên UCF-Crime, hãy vô hiệu hóa Otsu bằng cờ `--adaptive_normal_selection false`:
+### Cấu hình Train Không Otsu (Triệt tiêu Ngôn ngữ - SOTA Tuyệt đối 40.21% cho UCF-Crime)
+Nếu bạn muốn đạt mốc đỉnh cao SOTA `40.21%` trên UCF-Crime, hãy vô hiệu hóa Otsu, ép trọng số `routing-sem-weight` về 0, và cân bằng tỷ lệ `0.5 - 0.5` cho thị giác:
 ```bash
 python src/ucf_train.py \
   --train-list /path/to/ucf_train.csv \
@@ -157,8 +157,8 @@ python src/ucf_train.py \
   --model-path /path/to/best_ucf.pth \
   --checkpoint-path /path/to/checkpoint_ucf.pth \
   --init-model-path /path/to/dsanet_model_ucf.pth \
-  --max-epoch 5 \
-  --batch-size 48 \
+  --max-epoch 10 \
+  --batch-size 64 \
   --num-workers 2 \
   --seed 234 \
   --rupa-use true \
@@ -167,8 +167,8 @@ python src/ucf_train.py \
   --main-lr 0.0 \
   --refiner-lr 1e-5 \
   --routing-det-weight 0.5 \
-  --routing-rec-weight 0.3 \
-  --routing-sem-weight 0.2 \
+  --routing-rec-weight 0.5 \
+  --routing-sem-weight 0.0 \
   --loss-residual-weight 1.0 \
   --loss-reconstructed-normal-weight 1.0 \
   --loss-dnp-normal-weight 0.1 \
