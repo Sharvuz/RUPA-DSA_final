@@ -281,6 +281,7 @@ def train(model, train_loader, test_loader, args, label_map: dict, device):
 
             optimizer_main.zero_grad()
             optimizer_refiner.zero_grad()
+            loss = loss.mean()
             loss.backward()
             optimizer_main.step()
             optimizer_refiner.step()

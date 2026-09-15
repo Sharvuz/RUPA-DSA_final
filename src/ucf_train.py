@@ -382,6 +382,7 @@ def train(model, normal_loader, anomaly_loader, testloader, args, label_map, dev
 
             optimizer_main.zero_grad()
             optimizer_refiner.zero_grad()
+            loss = loss.mean()
             loss.backward()
             # === Improvement 3: Gradient clipping ===
             if args.grad_clip > 0:
