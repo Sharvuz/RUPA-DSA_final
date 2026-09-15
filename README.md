@@ -107,7 +107,7 @@ python src/ucf_train.py \
   --num-workers 2 \
   --seed 234 \
   --rupa-use true \
-  --adaptive_normal_selection true \  #bật/tắt otsu
+  --adaptive_normal_selection false \  #bật/tắt otsu(dùng top-k thay otsu)
   --routing-mode safe_gate \
   --main-lr 0.0 \
   --refiner-lr 1e-5 \
@@ -134,7 +134,7 @@ python src/xd_train.py \
   --num-workers 2 \
   --seed 234 \
   --rupa-use true \
-  --adaptive_normal_selection true \  #bật/tắt otsu
+  --adaptive_normal_selection true \  #bật/tắt otsu(dùng otsu thay top-k)
   --routing-mode safe_gate \
   --main-lr 0.0 \
   --refiner-lr 1e-5 \
