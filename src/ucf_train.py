@@ -191,7 +191,7 @@ def train(model, normal_loader, anomaly_loader, testloader, args, label_map, dev
     for name, param in model.named_parameters():
         if not param.requires_grad:
             continue
-        if 'video_anomaly_refiner' in name:
+        if 'video_anomaly_refiner' in name or 'rupa_gate' in name:
             refiner_params.append(param)
         else:
             main_model_params.append(param)

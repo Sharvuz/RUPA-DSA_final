@@ -421,8 +421,7 @@ class DSANet(nn.Module):
             raise ValueError('At least one RUPA routing weight must be positive.')
         self.routing_det_weight /= routing_weight_sum
         self.routing_rec_weight /= routing_weight_sum
-        
-        self.routing_rec_weight /= routing_weight_sum
+
         self.routing_sem_weight /= routing_weight_sum
         
         self.routing_mode = getattr(args, 'routing_mode', 'safe_gate')
