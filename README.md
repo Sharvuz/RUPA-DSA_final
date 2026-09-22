@@ -34,7 +34,8 @@ To achieve the power of extracting subtle anomalies without degrading global rep
 ### 1. Two-Stage Training Strategy (Warm-Start & Safe Gate)
 Instead of training from scratch, this method turns RUPA into a **Plug-and-Play Adapter**:
 - **Stage 1 (Ignition):** Inherit all global topological representations from the original DSANet checkpoint. Then, **freeze the entire main network** (main-lr = 0.0) to resist Catastrophic Forgetting.
-- **Stage 2 (RUPA Refinement):** Open the gate for the RUPA branch to learn (efiner-lr = 1e-5). RUPA now stands on the shoulders of DSANet, receiving raw features and focusing 100% of its capacity on utilizing **Reconstruction** and **Semantic Routing** to correct biased predictions.
+- **Stage 2 (RUPA Refinement):** Open the gate for the RUPA branch to learn (
+efiner-lr = 1e-5). RUPA now stands on the shoulders of DSANet, receiving raw features and focusing 100% of its capacity on utilizing **Reconstruction** and **Semantic Routing** to correct biased predictions.
 
 ### 2. Adaptive Normal Selection (Otsu's Thresholding)
 Instead of selecting a fixed percentage of normal frames, RUPA integrates **Otsu's thresholding** algorithm. This algorithm automatically analyzes the 1D anomaly score distribution of each video to find an optimal cut-off threshold, accurately separating Normal and Abnormal regions. This ensures the Counterfactual Reconstruction process operates precisely.
@@ -56,7 +57,8 @@ To reproduce the SOTA scores above, the command configuration must strictly foll
 **Link to download the Author's original Best DSANet Checkpoint:** [Google Drive](https://drive.google.com/drive/folders/1PqvaNm_s-fOOrnJRqrG50zV2R2UqRwHK)
 
 ### Training Configuration for UCF-Crime (10 Epochs)
-`ash
+`ash
+
 python src/ucf_train.py \
   --train-list /path/to/ucf_train.csv \
   --test-list /path/to/ucf_test.csv \
@@ -83,7 +85,8 @@ python src/ucf_train.py \
 `
 
 ### Training Configuration for XD-Violence (10 Epochs - Requires Otsu)
-`ash
+`ash
+
 python src/xd_train.py \
   --train-list /path/to/xd_train.csv \
   --test-list /path/to/xd_test.csv \
@@ -111,7 +114,8 @@ python src/xd_train.py \
 
 ### Training Configuration (Neutralizing Language - Absolute SOTA 40.21% for UCF-Crime)
 To achieve the absolute SOTA peak of 40.21% on UCF-Crime, disable Otsu, set the routing-sem-weight to 0, and balance a 0.5 - 0.5 ratio for Vision:
-`ash
+`ash
+
 python src/ucf_train.py \
   --train-list /path/to/ucf_train.csv \
   --test-list /path/to/ucf_test.csv \
