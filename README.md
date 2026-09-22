@@ -2,7 +2,6 @@
 
 
 
-*Read this in other languages: [Tiáº¿ng Viá»‡t](README_vi.md)*
 
 
 
