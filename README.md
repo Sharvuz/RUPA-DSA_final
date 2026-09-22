@@ -1,6 +1,6 @@
 ﻿# RUPA-DSA: Reliability-Aware Unified Prototype Alignment with Dual Semantic-Aware Network
 
-*Read this in other languages: [Tiếng Việt](README_vi.md)*
+*Read this in other languages: [Tiáº¿ng Viá»‡t](README_vi.md)*
 
 **RUPA-DSA** (Reliability-Aware Unified Prototype Alignment with Dual Semantic-Aware Network) is an advanced framework designed for Weakly-Supervised Video Anomaly Detection (WS-VAD). 
 
@@ -8,7 +8,7 @@ By leveraging a **Two-stage Progressive Training (Warm-Start) strategy**, **adap
 
 ---
 
-## 🏆 Record-Breaking Benchmarks
+## ðŸ† Record-Breaking Benchmarks
 Below are the actual performance metrics recorded when training the RUPA-DSA architecture (with CLIP features) using the Warm-Start technique:
 
 ### 1. XD-Violence Dataset (Multi-domain)
@@ -27,22 +27,21 @@ Below are the actual performance metrics recorded when training the RUPA-DSA arc
 
 ---
 
-## 🔑 Core Technological Contributions
+## ðŸ”‘ Core Technological Contributions
 
 To achieve the power of extracting subtle anomalies without degrading global representations, RUPA-DSA relies on two foundational techniques:
 
 ### 1. Two-Stage Training Strategy (Warm-Start & Safe Gate)
 Instead of training from scratch, this method turns RUPA into a **Plug-and-Play Adapter**:
-- **Stage 1 (Ignition):** Inherit all global topological representations from the original DSANet checkpoint. Then, **freeze the entire main network** (main-lr = 0.0) to resist Catastrophic Forgetting.
-- **Stage 2 (RUPA Refinement):** Open the gate for the RUPA branch to learn (
-efiner-lr = 1e-5). RUPA now stands on the shoulders of DSANet, receiving raw features and focusing 100% of its capacity on utilizing **Reconstruction** and **Semantic Routing** to correct biased predictions.
+- **Stage 1 (Ignition):** Inherit all global topological representations from the original DSANet checkpoint. Then, **freeze the entire main network** (`main-lr = 0.0`) to resist Catastrophic Forgetting.
+- **Stage 2 (RUPA Refinement):** Open the gate for the RUPA branch to learn (`refiner-lr = 1e-5`). RUPA now stands on the shoulders of DSANet, receiving raw features and focusing 100% of its capacity on utilizing **Reconstruction** and **Semantic Routing** to correct biased predictions.
 
 ### 2. Adaptive Normal Selection (Otsu's Thresholding)
 Instead of selecting a fixed percentage of normal frames, RUPA integrates **Otsu's thresholding** algorithm. This algorithm automatically analyzes the 1D anomaly score distribution of each video to find an optimal cut-off threshold, accurately separating Normal and Abnormal regions. This ensures the Counterfactual Reconstruction process operates precisely.
 
 ---
 
-## 🖼️ Architecture Diagram
+## ðŸ–¼ï¸ Architecture Diagram
 
 ![RUPA-DSA Architecture](rupa_architecture.png)
 
@@ -50,15 +49,14 @@ Instead of selecting a fixed percentage of normal frames, RUPA integrates **Otsu
 
 ---
 
-## 🛠️ Training & Usage
+## ðŸ› ï¸ Training & Usage
 
 To reproduce the SOTA scores above, the command configuration must strictly follow the Warm-Start technique (Using Original Checkpoint + Freezing the main branch).
 
 **Link to download the Author's original Best DSANet Checkpoint:** [Google Drive](https://drive.google.com/drive/folders/1PqvaNm_s-fOOrnJRqrG50zV2R2UqRwHK)
 
 ### Training Configuration for UCF-Crime (10 Epochs)
-`ash
-
+```bash
 python src/ucf_train.py \
   --train-list /path/to/ucf_train.csv \
   --test-list /path/to/ucf_test.csv \
@@ -82,11 +80,10 @@ python src/ucf_train.py \
   --loss-dnp-normal-weight 0.1 \
   --loss-consistency-weight 1.0 \
   --loss-gather-weight 1.0
-`
+```
 
 ### Training Configuration for XD-Violence (10 Epochs - Requires Otsu)
-`ash
-
+```bash
 python src/xd_train.py \
   --train-list /path/to/xd_train.csv \
   --test-list /path/to/xd_test.csv \
@@ -110,12 +107,11 @@ python src/xd_train.py \
   --loss-dnp-normal-weight 0.1 \
   --loss-consistency-weight 1.0 \
   --loss-gather-weight 1.0
-`
+```
 
 ### Training Configuration (Neutralizing Language - Absolute SOTA 40.21% for UCF-Crime)
 To achieve the absolute SOTA peak of 40.21% on UCF-Crime, disable Otsu, set the routing-sem-weight to 0, and balance a 0.5 - 0.5 ratio for Vision:
-`ash
-
+```bash
 python src/ucf_train.py \
   --train-list /path/to/ucf_train.csv \
   --test-list /path/to/ucf_test.csv \
@@ -139,11 +135,12 @@ python src/ucf_train.py \
   --loss-dnp-normal-weight 0.1 \
   --loss-consistency-weight 1.0 \
   --loss-gather-weight 1.0
-`
+```
 
 > **Note:** The gradual decline in the AP score after reaching its peak in later Epochs is an intrinsic characteristic (Overfitting due to Label Noise) of the Warm-Start method in WS-VAD. The codebase has integrated **Early Stopping** to automatically capture and save the Weights at the highest score.
 
 ---
 
-## 📜 License
+## ðŸ“œ License
 This project is licensed under the MIT License.
+
